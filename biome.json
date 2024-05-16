@@ -30,7 +30,8 @@
 				"noEmptyBlockStatements": "off"
 			},
 			"style": {
-				"all": true
+				"all": true,
+				"useBlockStatements": "off"
 			},
 			"correctness": {
 				"all": true
