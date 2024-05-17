@@ -30,22 +30,30 @@ export type Player = {
 	photo: string
 }
 
-export enum Position {
-	Attacker = 'Attacker',
-	Defender = 'Defender',
-	Goalkeeper = 'Goalkeeper',
-	Midfielder = 'Midfielder',
-}
-
 export interface Team {
 	id: number
 	name: string
 	logo: string
 }
 
+type Position = 'Attacker' | 'Defender' | 'Goalkeeper' | 'Midfielder'
+
+type UnknownPlayer = {
+	position: Position
+}
+
+type GuessedPlayer = {
+	name: string
+	photo: string
+} & UnknownPlayer
+
+type FormationPlayer = {
+	player: UnknownPlayer | GuessedPlayer
+}
+
 export type Formation = {
-	attacker: number
-	midfielder: number
-	defender: number
-	goalkeeper: number
+	attackers: FormationPlayer[]
+	midfielders: FormationPlayer[]
+	defenders: FormationPlayer[]
+	goalkeeper: FormationPlayer[]
 }
