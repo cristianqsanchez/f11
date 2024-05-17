@@ -1,34 +1,33 @@
-import type { Formation } from '@/shared/types'
+import type { Formation, FormationPlayer, Position } from '@/shared/types'
+
+type FormationPlayers = {
+	attackersQty: number
+	midfieldersQty: number
+	defendersQty: number
+}
+
+const createPlayerPosition = (
+	qty: number,
+	position: Position,
+): FormationPlayer[] =>
+	new Array<FormationPlayer>(qty).fill({ player: { position } })
+
+const createFormation = ({
+	attackersQty,
+	defendersQty,
+	midfieldersQty,
+}: FormationPlayers): Formation => ({
+	attackers: createPlayerPosition(attackersQty, 'Attacker'),
+	midfielders: createPlayerPosition(midfieldersQty, 'Midfielder'),
+	defenders: createPlayerPosition(defendersQty, 'Defender'),
+	goalkeeper: createPlayerPosition(1, 'Goalkeeper'),
+})
 
 const formations: Formation[] = [
-	{
-		// 4-3-3
-		attacker: 3,
-		midfielder: 3,
-		defender: 4,
-		goalkeeper: 1,
-	},
-	{
-		// 4-4-2
-		attacker: 2,
-		midfielder: 4,
-		defender: 4,
-		goalkeeper: 1,
-	},
-	{
-		// 3-5-2
-		attacker: 2,
-		midfielder: 5,
-		defender: 3,
-		goalkeeper: 1,
-	},
-	{
-		// 5-3-2
-		attacker: 2,
-		midfielder: 3,
-		defender: 5,
-		goalkeeper: 1,
-	},
+	createFormation({ attackersQty: 3, midfieldersQty: 3, defendersQty: 4 }),
+	createFormation({ attackersQty: 2, midfieldersQty: 4, defendersQty: 4 }),
+	createFormation({ attackersQty: 2, midfieldersQty: 5, defendersQty: 3 }),
+	createFormation({ attackersQty: 2, midfieldersQty: 3, defendersQty: 5 }),
 ]
 
 export const getRandomFormation = () =>
